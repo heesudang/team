@@ -1,0 +1,58 @@
+<!DOCTYPE html> 
+<html lang="ko">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Insert title here</title>
+		<link rel="shortcut icon" href="../image/icon.png" />
+		<link rel="apple-touch-icon" href="../image/icon.png" />
+		
+				<!-- 공통 css -->
+		<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="../css/common.css" />		
+		
+		<!-- jQuery Framework 참조하기 -->
+		<script src="../js/jquery-3.7.1.min.js"></script>
+ 		<script>
+ 			$(function(){
+ 				$("#mybtn").on("click", function(){
+ 					$.ajax({
+ 						url:'/firstExample/ajax/xml/04.xml',
+ 						method:'get',
+ 						dataType:'xml'
+ 
+ 					}).done(function(data){
+ 						$(data).find("subject").each(function(){
+ 							let title = $(this).find("title").text();
+ 							let time = $(this).find("time").text();
+ 							let teacher = $(this).find("teacher").text();
+ 							
+ 							let div = $("<div>");
+ 							let p1 = $("<p>").html(title);
+ 							let p2 = $("<p>").html(time);
+ 							let p3 = $("<p>").html(teacher);
+ 							
+ 							div.append(p1).append(p2).append(p3);
+ 							
+ 							$("#result").append(div);
+ 							$("#result").append("<hr />");
+ 						});
+ 						
+ 					}).fail(function(xhr, textStatus){
+ 						$("#result").html(textStatus) + " (HTTP-" + xhr.status +")";
+ 					});
+ 				});
+ 			});
+ 		
+ 		</script>
+	</head>
+	<body>
+    <h1 class="title">$.ajax() 함수를 사용한 텍스트 읽기3</h1>
+    
+    <div class="exec">
+        <input type="button" value="txt파일 가져오기" id="mybtn" />
+    </div>
+    
+    <div class="console" id="result"></div>
+    </body>
+</html>

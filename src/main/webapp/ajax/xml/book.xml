@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<books>
+	<book>
+	<title>세이노의 가르침</title>
+	<author>세이노</author>
+	<publisher>데이원</publisher>
+	<year>2023년</year>
+	<price>6400원</price>
+	</book>
+	<book>
+	<title>모순</title>
+	<author>양귀자</author>
+	<publisher>쓰다</publisher>
+	<year>2013년</year>
+	<price>11700원</price>
+	</book>
+	<book>
+	<title>마흔에 읽는 쇼펜하우어</title>
+	<author>김용수</author>
+	<publisher>유노북스</publisher>
+	<year>2023년</year>
+	<price>15300원</price>
+	</book>
+</books>

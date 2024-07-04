@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Example</title>
+    <link rel="shortcut icon" href="../image/icon.png" />
+    <link rel="apple-touch-icon" href="../image/icon.png" />
+    
+    <!-- 공통 css -->
+    <link rel="stylesheet" type="text/css" href="../css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="../css/common.css" />
+    
+    <!-- jQuery Framework 참조하기 -->
+    <script src="../js/jquery-3.7.1.min.js"></script>
+    <script>
+        $(function(){
+            $.getJSON('/firstExample/ajax/json/book.json', function(data){
+                let books = data.book.books;
+                
+                $(books).each(function(){
+                    let title = this.title;
+                    let author = this.author;
+                    let price = this.price;
+                    
+                    let ul = $("<ul>");
+                    let li1 = $("<li>").html("Title: " + title);
+                    let li2 = $("<li>").html("Author: " + author);
+                    let li3 = $("<li>").html("Price: " + price);
+                    
+                    ul.append(li1).append(li2).append(li3);
+                    
+                    $("#result").append(ul);
+                    $("#result").append("<hr />");
+                });
+            }).fail(function(xhr, status){
+                $("#result").html("오류 발생 (HTTP-" + status + ")");
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1 class="title">JSON 데이터 출력 예제</h1>
+
+    <div class="exec"></div>
+
+    <div class="console" id="result"></div>
+</body>
+</html>

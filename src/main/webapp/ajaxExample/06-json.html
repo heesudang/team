@@ -1,0 +1,52 @@
+<!DOCTYPE html> 
+<html lang="ko">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>06-json.html</title>
+		<link rel="shortcut icon" href="../image/icon.png" />
+		<link rel="apple-touch-icon" href="../image/icon.png" />
+		
+						<!-- 공통 css -->
+		<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="../css/common.css" />		
+		
+		<!-- jQuery Framework 참조하기 -->
+		<script src="../js/jquery-3.7.1.min.js"></script>
+ 		<script>
+ 			$(function(){
+ 				$("#mybtn").on("click", function(){
+ 					$.ajax({
+ 						url:'/firstExample/ajax/json/05.json',
+ 						method:'get',
+ 						dataType:'json'
+ 					}).done(function(json){
+ 						let title = json.school.subject.title;
+ 						let time = json.school.subject.time;
+ 						let teacher = json.school.subject.teacher;
+ 						
+ 						let ul =$("<ul>");
+ 						let li1 = $("<li>").html(title);
+ 						let li2 = $("<li>").html(time);
+ 						let li3 = $("<li>").html(teacher);
+ 						
+ 						let data = ul.append(li1).append(li2).append(li3);
+ 						
+ 						$("#result").append(data); 					
+ 					}).fail(function(xhr, textStatus){
+ 						$("#result").html(textStatus)+ "(HTTP-" + xhr.status + ")";
+ 					});
+ 				});
+ 			});
+ 		</script>
+	</head>
+	<body>
+	    <h1 class="title">json</h1>
+    
+    <div class="exec">
+        <input type="button" value="json 가져오기" id="mybtn" />
+    </div>
+    
+    <div class="console" id="result"></div>
+	</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html> 
+<html lang="ko">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Insert title here</title>
+		<link rel="shortcut icon" href="../image/icon.png" />
+		<link rel="apple-touch-icon" href="../image/icon.png" />
+		
+								<!-- 공통 css -->
+		<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="../css/common.css" />		
+		
+		<!-- jQuery Framework 참조하기 -->
+		<script src="../js/jquery-3.7.1.min.js"></script>
+ 		<script>
+ 			$(function(){
+ 				$("#mybtn").on("click", function(){
+ 					$.ajax({
+ 						"url":'/firstExample/ajax/json/06.json',
+ 						"method":'get',
+ 						"dataType":'json'
+ 	 				}).done(function(json){
+ 	 					let subject = json.school.subject;
+ 	 					/*
+ 	 					for(let i=0; i<subject.length; i++){
+ 	 						
+ 	 						let title = subject[i].title;
+ 	 						let time = subject[i].time;
+ 	 						let teacher = subject[i].teacher;
+ 	 						
+ 	 						let ul = $("<ul>");
+ 	 						let li1 = $("<li>").html(title);
+ 	 						let li2 = $("<li>").html(time);
+ 	 						let li3 = $("<li>").html(teacher);
+ 	 						
+ 	 						ul.append(li1).append(li2).append(li3);
+ 		 					$("#result").append(ul);
+ 	 						$("#result").append("<hr />");
+ 	 					}*/
+ 	 					
+ 	 					/* json 데이터 접근은 this 객체로 가능.
+ 	 						자바스크립트느 json을 데이터 자체로 해석하고 또는 클래스 정의시 객체 리터럴로 해석
+ 	 						그래서 요소를 필드를 보기에 this.key로 접근이 가능하다.*/
+ 	 						
+ 	 					$(subject).each(function(){
+ 	 						let title = this.title;
+ 	 						let time = this.time;
+ 	 						let teacher = this.teacher;
+ 	 						
+ 	 						let ul = $("<ul>");
+ 	 						let li1 = $("<li>").html(title);
+ 	 						let li2 = $("<li>").html(time);
+ 	 						let li3 = $("<li>").html(teacher);
+ 	 						
+ 	 						ul.append(li1).append(li2).append(li3);
+ 		 					$("#result").append(ul);
+ 	 						$("#result").append("<hr />");
+ 	 						
+ 	 					});
+ 	 					
+ 	 					
+ 	 				}).fail(function(xhr , textStatus){
+ 	 					$("#result").html(textStatus) + "(HTTP- " + xhr.stauts + ")";
+ 	 				});
+ 				});
+ 			});
+ 		
+ 		</script>
+	</head>
+	<body>
+	 <h1 class="title">json</h1>
+    
+    <div class="exec">
+        <input type="button" value="json 가져오기" id="mybtn" />
+    </div>
+    
+    <div class="console" id="result"></div>
+	</body>
+</html>

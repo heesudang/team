@@ -1,0 +1,67 @@
+<!DOCTYPE html> 
+<html lang="ko">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Insert title here</title>
+		<link rel="shortcut icon" href="../image/icon.png" />
+		<link rel="apple-touch-icon" href="../image/icon.png" />
+		
+		<script src="../js/jquery-3.7.1.min.js"></script>
+		
+		<script>
+			$(function(){
+				$.ajax({
+					url:'/firstExample/ajax/xml/book.xml',
+					method:'get',
+					dataType:'xml'
+					
+				}).done(function(data){
+					$(data).find("book").each(function(){
+						let no = $(this).index()+1;
+						let title = $(this).find("title").text();
+						let author = $(this).find("author").text();
+						let publisher = $(this).find("publisher").text();
+						let year = $(this).find("year").text();
+						let price = $(this).find("price").text();
+						
+						let li = $("<li>").html(no + " - " + title + ", " + author + ", " + publisher + ", " + year + ", " + price);
+						
+						$("#view").append(li);
+					
+					});	
+				}).fail(function(xhr, textStatus){
+					$("#result").html(textStatus) + "(HTTP- " + xhr.status + ")";
+				});
+				/* get() 함수로 접근
+					$.get(요청할 url, 요청시 전달할 파라미터, 콜백함수) <-정상적으로 호출시 호출함수.fail(콜백함수)<- 실패시 호출
+					같은 서버에 위치하고 있는 데이터를 요청하기 때문에 ../ajax/xml/book.xml 가능합니다.
+					하지만 다른 위치에서 접근시 경로가 달라져야 하기 때문에 uri 요청을 권장합니다 */
+					
+				$.get('/firstExample/ajax/xml/book.xml', function(data){
+					$(data).find("book").each(function(){
+						let title = $(this).find("title").text();
+						let author = $(this).find("author").text();
+						let publisher = $(this).find("publisher").text();
+						let year = $(this).find("year").text();
+						let price = $(this).find("price").text();
+						
+						let txt = $("<li>").html(title + ", " + author + ", " + publisher + ", " + year + ", " + price);
+						$("#view").append(txt);
+					});
+				}).fail(function(xhr, textStatus){
+					$("#result").html(textStatus) + "(HTTP- " + xhr.status + ")";
+				});
+			});
+			
+		</script>
+	</head>
+	<body>
+	<div>
+	<h1>예제- 책정보 출력하기</h1>
+		<div id="result">
+			<ul id="view"></ul>
+		</div>
+	</div>
+	</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html> 
+<html lang="ko">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>text(1) - 01-text.html</title>
+		<link rel="shortcut icon" href="../image/icon.png" />
+		<link rel="apple-touch-icon" href="../image/icon.png" />
+		
+		<!-- 공통 css -->
+		<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="../css/common.css" />		
+		
+		<!-- jQuery Framework 참조하기 -->
+		<script src="../js/jquery-3.7.1.min.js"></script>
+ 		<script>
+			$(function(){
+				$("#mybtn").on("click", function(){
+					$.ajax({
+						url:"/firstExample/ajax/text/01.txt",
+						method:"get",
+						dataType:"text"
+					}).done(function (data){
+						//통신이 성공했을 때 실행되는 함수.(서버의 응답 시 처리 과정)
+						//dataType 값이 text일 경우에는 단순히 내용에 대한 문자열이므로, 직접 HTML요소에 출력할 수 있다.
+						$("#result").html(data);
+					}).fail(function(xhr, textStatus){
+						//통신이 실패했을때 실행되는 함수
+						$("#result").html(textStatus + "(HTTP-" + xhr.status + ")");
+					});
+				});
+			});
+		
+		
+		</script>
+	</head>
+	
+	<body>
+	<h1 class="title">$.ajax() 함수를 사용한 텍스트 읽기</h1>
+	
+	<div class="exec">
+		<input type="button" value="txt파일 가져오기" id="mybtn" />
+	</div>
+	
+	<div class="console" id="result"></div>
+	</body>
+</html>

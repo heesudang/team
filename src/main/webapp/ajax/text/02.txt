@@ -1,0 +1,26 @@
+<div>
+<h1 style="color:red">내가 좋아하는 것들</h1>
+<h2 style="color:blue"><img src="../image/icon.png" alt="jQuery 아이콘" />소개하겠습니다.</h2>
+<table>
+	<thead>
+		<tr>
+			<th>좋아하는것</th>
+			<th>좋아하는 이유</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>수댕이</td>
+			<td>아주 귀엽습니다.</td>
+		</tr>
+		<tr>
+			<td>수박</td>
+			<td>달고 시원해서 좋아합니다.</td>
+		</tr>
+		<tr>
+			<td>고양이</td>
+			<td>너무 귀여워서 심장에 안좋습니다.</td>
+		</tr>
+	</tbody>
+</table>
+</div>
